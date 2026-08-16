@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      * { box-sizing: border-box; margin: 0; }
+      body {
+        width: 340px;
+        background: #0b1120;
+        color: #e2e8f0;
+        font-family: system-ui, -apple-system, sans-serif;
+        padding: 16px;
+      }
+      .row { display: flex; align-items: center; gap: 8px; }
+      .dot { width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 8px #34d399; }
+      .brand { color: #fff; font-weight: 800; font-size: 14px; }
+      .badge { margin-left: auto; color: #818cf8; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+      .muted { color: #94a3b8; font-size: 11px; margin-top: 6px; }
+      .url { color: #64748b; font-size: 11px; margin-top: 2px; }
+      .scoreline { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+      .score { font-weight: 800; font-size: 26px; color: #f87171; }
+      .score small { font-size: 10px; color: #94a3b8; font-weight: 600; }
+      .barwrap { flex: 1; }
+      .barhead { display: flex; justify-content: space-between; font-size: 10px; color: #94a3b8; margin-bottom: 4px; }
+      .bar { height: 6px; border-radius: 99px; background: #1e293b; overflow: hidden; }
+      .barfill { height: 100%; width: 72%; border-radius: 99px; background: #f87171; transition: width 0.8s ease; }
+      .clause { margin-top: 8px; padding: 8px 10px; border-radius: 8px; font-size: 11px; line-height: 1.45; }
+      .error { background: #450a0a; border: 1px solid #7f1d1d; color: #fca5a5; }
+      .warn { background: #451a03; border: 1px solid #92400e; color: #fcd34d; }
+      .flags { margin-top: 10px; }
+      .actions { display: flex; gap: 8px; margin-top: 12px; }
+      .btn { flex: 1; border: 0; font-weight: 700; font-size: 12px; padding: 9px; border-radius: 8px; cursor: pointer; }
+      .btn-primary { background: linear-gradient(90deg, #6366f1, #06b6d4); color: #fff; }
+      .btn-ghost { background: transparent; border: 1px solid #334155; color: #94a3b8; }
+      .verdict { display: inline-block; margin-top: 8px; background: #7f1d1d; color: #fecaca; border-radius: 99px; padding: 2px 8px; font-size: 10px; font-weight: 700; }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <span class="dot"></span>
+      <span class="brand">ClauseGuard</span>
+      <span class="badge">Risk scan</span>
+    </div>
+    <p class="muted">Checking the policy behind this sign-up…</p>
+    <p class="url" id="url">current-tab</p>
+
+    <div id="stage-scan">
+      <div class="scoreline">
+        <div style="flex:1;text-align:center;color:#94a3b8;font-size:11px">Fetching & parsing legal document…</div>
+      </div>
+    </div>
+
+    <div id="stage-done" style="display:none">
+      <div class="scoreline">
+        <div class="score">72<small>/100</small></div>
+        <div class="barwrap">
+          <div class="barhead"><span>Hidden clauses</span><span style="color:#f87171">HIGH RISK</span></div>
+          <div class="bar"><div class="barfill" id="barfill"></div></div>
+        </div>
+      </div>
+      <span class="verdict">High risk — read carefully</span>
+      <div class="flags">
+        <div class="clause error">⚠ <b>Auto-renewal</b> · “renews automatically unless cancelled 48 hours prior”</div>
+        <div class="clause warn">⚠ <b>Forced arbitration</b> · class-action rights waived</div>
+        <div class="clause error">⚠ <b>Retention</b> · deleted content kept up to 24 months</div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="open-app">View full analysis</button>
+        <button class="btn btn-ghost" id="dismiss">Later</button>
+      </div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

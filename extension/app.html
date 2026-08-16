@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClauseGuard — Full Analysis</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; }
+      body {
+        min-height: 100vh;
+        background: radial-gradient(1000px 400px at 20% -10%, #1e1b4b 0%, #0b1120 55%);
+        color: #e2e8f0;
+        font-family: system-ui, -apple-system, sans-serif;
+        padding: 32px 16px;
+      }
+      .wrap { max-width: 720px; margin: 0 auto; }
+      .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; color: #fff; font-size: 15px; }
+      .pill { margin-left: auto; font-size: 10px; font-weight: 700; letter-spacing: 1px; color: #a5b4fc; text-transform: uppercase; }
+      h1 { font-size: 24px; margin-top: 20px; color: #fff; }
+      .sub { color: #94a3b8; font-size: 13px; margin-top: 4px; }
+      .card { margin-top: 20px; background: #101a30; border: 1px solid #1f2b45; border-radius: 14px; padding: 18px; }
+      .card h2 { font-size: 14px; color: #f1f5f9; margin-bottom: 12px; }
+      .meters { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .meter { background: #16223f; border: 1px solid #1f2b45; border-radius: 10px; padding: 12px; text-align: center; }
+      .meter b { display: block; font-size: 20px; color: #fff; margin-top: 6px; }
+      .meter span { font-size: 10px; color: #94a3b8; }
+      .clause { margin-top: 10px; padding: 12px; border-radius: 10px; font-size: 12px; line-height: 1.5; }
+      .error { background: #450a0a; border: 1px solid #7f1d1d; }
+      .warn { background: #451a03; border: 1px solid #92400e; }
+      .err-title { color: #fca5a5; font-weight: 700; }
+      .warn-title { color: #fcd34d; font-weight: 700; }
+      .plain { margin-top: 6px; color: #e2e8f0; }
+      .why { margin-top: 4px; color: #94a3b8; }
+      .foot { margin-top: 20px; text-align: center; color: #475569; font-size: 11px; }
+      @media (min-width: 640px) { .meters { grid-template-columns: repeat(4, 1fr); } }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="brand">
+        <span style="width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399"></span>
+        ClauseGuard
+        <span class="pill">Full analysis</span>
+      </div>
+      <h1 id="cg-domain">photobomb.app · Terms &amp; Privacy</h1>
+      <p id="cg-sub" class="sub">28 pages · 342 sentences · Overall risk <b style="color:#f87171">78/100 — High</b></p>
+
+      <div class="card">
+        <h2>Category risk profile</h2>
+        <div class="meters">
+          <div class="meter"><span>Privacy Risk</span><b style="color:#f87171">74</b></div>
+          <div class="meter"><span>Data Sharing</span><b style="color:#f87171">82</b></div>
+          <div class="meter"><span>Content Ownership</span><b style="color:#f87171">88</b></div>
+          <div class="meter"><span>Account Control</span><b style="color:#fbbf24">61</b></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Hidden Clause Finder</h2>
+        <div class="clause error">
+          <span class="err-title">CRITICAL · Broad content license</span>
+          <p class="plain">“You grant us a perpetual, irrevocable, worldwide, royalty-free, sublicensable license to all content you post.”</p>
+          <p class="why">→ They can use, sell, and relicense your photos forever, even after you delete your account.</p>
+        </div>
+        <div class="clause error">
+          <span class="err-title">CRITICAL · Post-deletion retention</span>
+          <p class="plain">“We may retain backup copies of deleted content for up to 24 months.”</p>
+          <p class="why">→ Your “deleted” photos keep living on their servers for two more years.</p>
+        </div>
+        <div class="clause warn">
+          <span class="warn-title">WARNING · Auto-renewal</span>
+          <p class="plain">“Renews automatically unless cancelled 48 hours before the renewal date.”</p>
+          <p class="why">→ You are charged again every cycle until you remember to cancel.</p>
+        </div>
+      </div>
+
+      <p class="foot">ClauseGuard prototype · HackFusion 2026</p>
+    </div>
+    <script>
+      try {
+        const params = new URLSearchParams(window.location.search)
+        const d = params.get('domain')
+        if (d) {
+          const title = document.getElementById('cg-domain')
+          const sub = document.getElementById('cg-sub')
+          if (title) title.textContent = `${d} · Terms & Privacy`
+          if (sub) sub.textContent = `Auto analysis from ClauseGuard — open the app to run a live scan for ${d}`
+        }
+      } catch (e) {}
+    </script>
+  </body>
+</html>
