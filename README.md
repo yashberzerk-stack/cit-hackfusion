@@ -54,3 +54,5 @@ If you want, I can now:
 - scaffold a small FastAPI backend to call an LLM for higher-quality clause extraction, or
 - prepare the extension for packaging (manifest tweaks, icons, publishing notes).
 Which would you like me to do next?
+
+### Note : add node_modules folder before using.
