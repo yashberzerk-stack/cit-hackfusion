@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClauseGuard — Settings</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        min-height: 100vh;
+        background: #0b1120;
+        color: #e2e8f0;
+        font-family: system-ui, -apple-system, sans-serif;
+        padding: 32px 16px;
+      }
+      .wrap { max-width: 520px; margin: 0 auto; }
+      .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; color: #fff; font-size: 15px; }
+      .pill { margin-left: auto; font-size: 10px; font-weight: 700; letter-spacing: 1px; color: #a5b4fc; text-transform: uppercase; }
+      h1 { font-size: 22px; margin-top: 20px; color: #fff; }
+      .sub { color: #94a3b8; font-size: 13px; margin-top: 4px; }
+      .section { margin-top: 24px; }
+      .section-title { font-size: 11px; font-weight: 700; color: #818cf8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+      .card { background: #101a30; border: 1px solid #1f2b45; border-radius: 14px; overflow: hidden; }
+      .toggle-row { display: flex; align-items: center; padding: 14px 16px; border-bottom: 1px solid #1f2b45; }
+      .toggle-row:last-child { border-bottom: none; }
+      .toggle-info { flex: 1; }
+      .toggle-label { font-size: 13px; font-weight: 600; color: #e2e8f0; }
+      .toggle-desc { font-size: 11px; color: #64748b; margin-top: 2px; }
+      .toggle { position: relative; width: 40px; height: 22px; cursor: pointer; }
+      .toggle input { opacity: 0; width: 0; height: 0; }
+      .toggle .slider { position: absolute; inset: 0; background: #334155; border-radius: 11px; transition: 0.2s; }
+      .toggle .slider::before { content: ''; position: absolute; width: 16px; height: 16px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: 0.2s; }
+      .toggle input:checked + .slider { background: #6366f1; }
+      .toggle input:checked + .slider::before { transform: translateX(18px); }
+
+      .weight-section { padding: 16px; }
+      .weight-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+      .weight-item:last-child { margin-bottom: 0; }
+      .weight-label { width: 120px; font-size: 12px; font-weight: 600; color: #cbd5e1; }
+      .weight-slider { flex: 1; -webkit-appearance: none; height: 4px; border-radius: 2px; background: #334155; outline: none; }
+      .weight-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: #6366f1; cursor: pointer; }
+      .weight-value { width: 40px; text-align: right; font-size: 12px; font-weight: 700; color: #a5b4fc; }
+
+      .save-btn { width: 100%; margin-top: 24px; padding: 12px; border: 0; border-radius: 12px; background: linear-gradient(90deg, #6366f1, #06b6d4); color: #fff; font-weight: 700; font-size: 14px; cursor: pointer; transition: filter 0.15s; }
+      .save-btn:hover { filter: brightness(1.1); }
+      .save-btn:active { transform: scale(0.98); }
+
+      .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #064e3b; color: #34d399; padding: 10px 20px; border-radius: 8px; font-size: 12px; font-weight: 700; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+      .toast.show { opacity: 1; }
+
+      .about { margin-top: 32px; text-align: center; color: #475569; font-size: 11px; line-height: 1.6; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="brand">
+        <span style="width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399"></span>
+        ClauseGuard
+        <span class="pill">Settings</span>
+      </div>
+
+      <h1>Settings & Risk Profile</h1>
+      <p class="sub">Customize how ClauseGuard analyzes and presents policy risks.</p>
+
+      <div class="section">
+        <div class="section-title">Features</div>
+        <div class="card">
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <div class="toggle-label">Inline Annotations</div>
+              <div class="toggle-desc">Highlight risky clauses directly on policy pages</div>
+            </div>
+            <label class="toggle"><input type="checkbox" id="toggle-annotations" checked /><span class="slider"></span></label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <div class="toggle-label">Badge Risk Level</div>
+              <div class="toggle-desc">Show risk level on the extension icon</div>
+            </div>
+            <label class="toggle"><input type="checkbox" id="toggle-badge" checked /><span class="slider"></span></label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <div class="toggle-label">Policy Change Monitoring</div>
+              <div class="toggle-desc">Alert when a previously visited policy changes</div>
+            </div>
+            <label class="toggle"><input type="checkbox" id="toggle-changes" checked /><span class="slider"></span></label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <div class="toggle-label">Prefer Chrome AI</div>
+              <div class="toggle-desc">Use on-device Gemini Nano when available (Chrome only)</div>
+            </div>
+            <label class="toggle"><input type="checkbox" id="toggle-ai" checked /><span class="slider"></span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Personalized Risk Weights</div>
+        <div class="card">
+          <div class="weight-section">
+            <p style="font-size:11px;color:#64748b;margin-bottom:14px">Adjust what matters most to you. Higher weight = bigger impact on your personal risk score.</p>
+            <div class="weight-item">
+              <span class="weight-label">Privacy Risk</span>
+              <input type="range" class="weight-slider" id="weight-privacy" min="0" max="2" step="0.1" value="1" />
+              <span class="weight-value" id="val-privacy">1.0x</span>
+            </div>
+            <div class="weight-item">
+              <span class="weight-label">Data Sharing</span>
+              <input type="range" class="weight-slider" id="weight-dataSharing" min="0" max="2" step="0.1" value="1" />
+              <span class="weight-value" id="val-dataSharing">1.0x</span>
+            </div>
+            <div class="weight-item">
+              <span class="weight-label">Content Ownership</span>
+              <input type="range" class="weight-slider" id="weight-ownership" min="0" max="2" step="0.1" value="1" />
+              <span class="weight-value" id="val-ownership">1.0x</span>
+            </div>
+            <div class="weight-item">
+              <span class="weight-label">Account Control</span>
+              <input type="range" class="weight-slider" id="weight-control" min="0" max="2" step="0.1" value="1" />
+              <span class="weight-value" id="val-control">1.0x</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="save-btn" id="save-btn">Save Changes</button>
+
+      <p class="about">
+        ClauseGuard v2.0<br/>
+        All analysis runs locally in your browser.<br/>
+        No data is sent to any server.<br/>
+        HackFusion 2026
+      </p>
+    </div>
+
+    <div class="toast" id="toast">Settings saved!</div>
+
+    <script src="settings.js"></script>
+  </body>
+</html>

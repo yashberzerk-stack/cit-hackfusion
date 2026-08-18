@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "ClauseGuard — AI Policy Risk Analyzer",
+  "version": "2.0.0",
+  "description": "Real-time T&C & Privacy Policy risk analysis with inline annotations, personalized risk profiles, and policy change monitoring. All processing happens on-device — no data leaves your browser.",
+  "permissions": ["activeTab", "storage", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "ClauseGuard",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/annotator.js"],
+      "css": ["content/highlight.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["pages/report.html", "pages/report.js", "pages/settings.html", "pages/settings.js", "analyzer/ruleAnalyzer.js", "analyzer/classifier.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+
+  "_comment_mv2": "For Firefox: change manifest_version to 2, replace background.service_worker with background.scripts, replace action with browser_action, and remove _comment_mv2.",
+  "_comment_safari": "Safari requires an Xcode project wrapper. Use safari-web-extension-builder to convert this MV3 manifest."
+}

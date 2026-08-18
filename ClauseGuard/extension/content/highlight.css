@@ -1,0 +1,52 @@
+/* ClauseGuard — Inline Annotation Highlight Styles */
+
+.cg-highlight {
+  background: rgba(56, 189, 248, 0.1);
+  border-bottom: 2px solid rgba(56, 189, 248, 0.3);
+  cursor: help;
+  position: relative;
+  border-radius: 2px;
+  padding: 0 1px;
+  transition: background 0.2s ease;
+}
+
+.cg-highlight:hover {
+  background: rgba(56, 189, 248, 0.2);
+}
+
+.cg-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 8px 10px;
+  min-width: 200px;
+  max-width: 300px;
+  z-index: 2147483646;
+  display: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #e2e8f0;
+  pointer-events: none;
+}
+
+.cg-highlight:hover .cg-tooltip {
+  display: block;
+}
+
+.cg-policy-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 4px;
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+#clauseguard-overlay {
+  font-family: system-ui, -apple-system, sans-serif;
+}
