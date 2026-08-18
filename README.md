@@ -2,6 +2,8 @@
 
 This repository contains the ClauseGuard front-end prototype and a lightweight browser extension prototype used to demo policy risk scanning and plain-English translations for Terms & Conditions and Privacy Policies.
 
+- Note that the real working project is inside the ClauseGuard folder, and read the note, in the end of this file
+
 ## What’s included
 - React + Vite single-page app (`src/`) with: analyzer UI, compare, history, and settings pages.
 - A minimal rule-based analyzer for quick local scans: `src/lib/ruleAnalyzer.js`.
